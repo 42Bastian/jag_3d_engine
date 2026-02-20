@@ -74,9 +74,9 @@ ifeq ($(LZ4),0)
 # uncompressed ROM
 #
 ifeq ($(SKUNK),1)
-bin/$(DEMO).j64: romloader.bin
+bin/$(DEMO).j64: loader/romloader.bin
 	cp $(BJL_ROOT)/bin/fastbt2_nb.bin $@
-	cat romloader.bin >> $@
+	cat loader/romloader.bin >> $@
 	bzcat $(BJL_ROOT)/bin/allff.bin.bz2 >>$@
 ifeq ($(MOD),0)
 	truncate -s 1M $@
@@ -86,7 +86,7 @@ endif
 
 else
 bin/$(DEMO).j64: $(DEMO).o
-	@cat sbl.XXX >$@
+	@cat loader/sbl.XXX >$@
 	cat $< >> $@
 	bzcat $(BJL_ROOT)/bin/allff.bin.bz2 >> $@
 ifeq ($(MOD),0)
@@ -100,9 +100,9 @@ else
 # LZ4 compressed ROM
 #
 ifeq ($(SKUNK),1)
-$(DEMO).j64: romloader_lz4.bin
+$(DEMO).j64: loader/romloader_lz4.bin
 	cp $(BJL_ROOT)/bin/fastbt2_nb.bin $@
-	cat romloader_lz4.bin >> $@
+	cat loader/romloader_lz4.bin >> $@
 	bzcat $(BJL_ROOT)/bin/allff.bin.bz2 >>$@
 ifeq ($(MOD),0)
 	truncate -s 256K $@
@@ -111,7 +111,7 @@ else
 endif
 
 else
-bin/$(DEMO).j64: sbl_lz4.XXX header.bin
+bin/$(DEMO).j64: loader/sbl_lz4.XXX header.bin
 	$Qcp $< $@
 	cat header.bin >> $@
 
@@ -123,10 +123,10 @@ endif
 endif
 endif
 
-romloader_lz4.bin: romloader.S $(DEMO).bin.lz4
+loader/romloader_lz4.bin: loader/romloader.S $(DEMO).bin.lz4
 	$(RMAC) -fr -DLZ4=1 -o $@ $<
 
-romloader.bin: romloader.S $(DEMO).bin
+loader/romloader.bin: loader/romloader.S $(DEMO).bin
 	$(RMAC) -fr -DLZ4=0 -o $@ $<
 
 $(DEMO).bin.lz4: $(DEMO).bin
@@ -147,4 +147,4 @@ clean:
 	rm -f *.equ
 	rm -f *~
 	rm -f *.cof *.j64 *.rom *.abs $(DEMO).bin header.bin *.lz4
-	rm -f romloader*.bin
+	rm -f loader/romloader*.bin
