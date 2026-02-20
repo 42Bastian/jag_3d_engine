@@ -1,0 +1,175 @@
+;-*-asm-*-
+	.align 4
+
+diamant_points:
+	DC.L 20
+ PT  0 , 0 , -80
+ PT  100 , 0 , 0
+ PT  94 , 34 , 0
+ PT  77 , 64 , 0
+ PT  50 , 87 , 0
+ PT  17 , 98 , 0
+ PT  -17 , 98 , 0
+ PT  -50 , 87 , 0
+ PT  -77 , 64 , 0
+ PT  -94 , 34 , 0
+ PT  -100 , 0 , 0
+ PT  -94 , -34 , 0
+ PT  -77 , -64 , 0
+ PT  -50 , -87 , 0
+ PT  -17 , -98 , 0
+ PT  17 , -98 , 0
+ PT  50 , -87 , 0
+ PT  77 , -64 , 0
+ PT  94 , -34 , 0
+ PT  0 , 0 , 80
+
+ IF TEXTURE <> 0
+diamant_texture_info_0:
+	tex_info_shifted 4, 0,0,63,63,0,63 		; front
+diamant_texture_info_1:
+	tex_info_shifted 4, 0,0,63,0,63,63	 	; front
+ ENDIF
+
+diamant_faces:
+	dc.l 36
+ IF TEXTURE <> 0
+	ttri 0, 2, 1,diamant_texture_info_0
+	ttri 0, 3, 2,diamant_texture_info_1
+	ttri 0, 4, 3,diamant_texture_info_0
+	ttri 0, 5, 4,diamant_texture_info_1
+	ttri 0, 6, 5,diamant_texture_info_0
+	ttri 0, 7, 6,diamant_texture_info_1
+	ttri 0, 8, 7,diamant_texture_info_0
+	ttri 0, 9, 8,diamant_texture_info_1
+	ttri 0,10, 9,diamant_texture_info_0
+	ttri 0,11,10,diamant_texture_info_1
+	ttri 0,12,11,diamant_texture_info_0
+	ttri 0,13,12,diamant_texture_info_1
+	ttri 0,14,13,diamant_texture_info_0
+	ttri 0,15,14,diamant_texture_info_1
+	ttri 0,16,15,diamant_texture_info_0
+	ttri 0,17,16,diamant_texture_info_1
+	ttri 0,18,17,diamant_texture_info_0
+	ttri 0, 1,18,diamant_texture_info_1
+
+	ttri 1, 2,19 ,diamant_texture_info_0
+	ttri 2, 3,19 ,diamant_texture_info_1
+	ttri 3, 4,19 ,diamant_texture_info_0
+	ttri 4, 5,19 ,diamant_texture_info_1
+	ttri 5, 6,19 ,diamant_texture_info_0
+	ttri 6, 7,19 ,diamant_texture_info_1
+	ttri 7, 8,19 ,diamant_texture_info_0
+	ttri 8, 9,19 ,diamant_texture_info_1
+	ttri 9,10,19 ,diamant_texture_info_0
+	ttri 10,11,19,diamant_texture_info_1
+	ttri 11,12,19,diamant_texture_info_0
+	ttri 12,13,19,diamant_texture_info_1
+	ttri 13,14,19,diamant_texture_info_0
+	ttri 14,15,19,diamant_texture_info_1
+	ttri 15,16,19,diamant_texture_info_0
+	ttri 16,17,19,diamant_texture_info_1
+	ttri 17,18,19,diamant_texture_info_0
+	ttri 18,1,19 ,diamant_texture_info_1
+ else
+	tri 0, 2, 1, $4030
+	tri 0, 3, 2, $4130
+	tri 0, 4, 3, $4230
+	tri 0, 5, 4, $4330
+	tri 0, 6, 5, $4430
+	tri 0, 7, 6, $4530
+	tri 0, 8, 7, $4630
+	tri 0, 9, 8, $4730
+	tri 0,10, 9, $4830
+	tri 0,11,10, $4930
+	tri 0,12,11, $4a30
+	tri 0,13,12, $4b30
+	tri 0,14,13, $4c30
+	tri 0,15,14, $4d30
+	tri 0,16,15, $4e30
+	tri 0,17,16, $4f30
+	tri 0,18,17, $5030
+	tri 0, 1,18, $5130
+
+	tri 1, 2,19 , $4030
+	tri 2, 3,19 , $4130
+	tri 3, 4,19 , $4230
+	tri 4, 5,19 , $4330
+	tri 5, 6,19 , $4430
+	tri 6, 7,19 , $4530
+	tri 7, 8,19 , $4630
+	tri 8, 9,19 , $4730
+	tri 9,10,19 , $4830
+	tri 10,11,19, $4930
+	tri 11,12,19, $4a30
+	tri 12,13,19, $4b30
+	tri 13,14,19, $4c30
+	tri 14,15,19, $4d30
+	tri 15,16,19, $4e30
+	tri 16,17,19, $4f30
+	tri 17,18,19, $5030
+	tri 18,1,19 , $5130
+ endif
+
+
+	.align 4
+diamant_normals:
+	dc.l 36
+ NT  -158 , -28 , 198
+ NT  -140 , -79 , 198
+ NT  -104 , -122 , 198
+ NT  -51 , -153 , 198
+ NT  0 , -161 , 198
+ NT  51 , -153 , 198
+ NT  104 , -122 , 198
+ NT  140 , -79 , 198
+ NT  158 , -28 , 198
+ NT  158 , 28 , 198
+ NT  140 , 79 , 198
+ NT  104 , 122 , 198
+ NT  51 , 153 , 198
+ NT  0 , 161 , 198
+ NT  -51 , 153 , 198
+ NT  -104 , 122 , 198
+ NT  -140 , 79 , 198
+ NT  -158 , 28 , 198
+ NT  -158 , -28 , -198
+ NT  -140 , -79 , -198
+ NT  -104 , -122 , -198
+ NT  -51 , -153 , -198
+ NT  0 , -161 , -198
+ NT  51 , -153 , -198
+ NT  104 , -122 , -198
+ NT  140 , -79 , -198
+ NT  158 , -28 , -198
+ NT  158 , 28 , -198
+ NT  140 , 79 , -198
+ NT  104 , 122 , -198
+ NT  51 , 153 , -198
+ NT  0 , 161 , -198
+ NT  -51 , 153 , -198
+ NT  -104 , 122 , -198
+ NT  -140 , 79 , -198
+ NT  -158 , 28 , -198
+diamant_vnormals:
+ dc.l  20
+ VNT  0 , 0 , 256
+ VNT  -256 , 0 , 0
+ VNT  -240 , -86 , 0
+ VNT  -197 , -162 , 0
+ VNT  -125 , -223 , 0
+ VNT  -41 , -252 , 0
+ VNT  41 , -252 , 0
+ VNT  125 , -223 , 0
+ VNT  197 , -162 , 0
+ VNT  240 , -86 , 0
+ VNT  256 , 0 , 0
+ VNT  240 , 86 , 0
+ VNT  197 , 162 , 0
+ VNT  125 , 223 , 0
+ VNT  41 , 252 , 0
+ VNT  -41 , 252 , 0
+ VNT  -125 , 223 , 0
+ VNT  -197 , 162 , 0
+ VNT  -240 , 86 , 0
+ VNT  0 , 0 , -256
