@@ -61,7 +61,7 @@ CLS::
 
  IF 1
  IF max_x = 640
-	movei	#BLIT_PITCH1|BLIT_PIXEL32|BLIT_WID3584|BLIT_XADDPHR,tmp0
+	movei	#BLIT_PITCH2|BLIT_PIXEL32|BLIT_WID3584|BLIT_XADDPHR,tmp0
 	store	tmp0,(blitter+_BLIT_A1_FLAGS)
 	movei	#(max_y)<<16|(max_x/2),tmp1
 	moveq	#0,tmp0
@@ -77,7 +77,7 @@ CLS::
 	store	tmp0,(blitter+$40)
 	movei	#($600)&0xffffff,tmp0
 	store	tmp0,(blitter+$70)		; int inc
-	movei	#BLIT_PITCH1|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPHR,tmp0
+	movei	#BLIT_PITCH2|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPHR,tmp0
 	store	tmp0,(blitter+_BLIT_A1_FLAGS)
 	moveq	#0,tmp1
 
@@ -416,8 +416,12 @@ xd:
 
 	include "rotate.inc"
 	include "addobj.inc"
+ IF LANDSCAPE = 10
+	include "createplane_new.inc"
+ ELSE
  IF LANDSCAPE = 1
 	include "createplane.inc"
+ ENDIF
  ENDIF
 	unreg	cam_x.a,cam_y.a,cam_z.a
 	unreg	cam_sin.a, neg_cam_sin.a, cam_cos.a
@@ -432,7 +436,11 @@ xd:
     IF GOURAUD = 1
   	include "draw2.inc"
     ELSE
+      IF SOFTCLIP = 1
   	include "draw2_nog.inc"
+      ELSE
+  	include "draw2_nog_hc.inc"
+      ENDIF
     ENDIF
   ENDIF
 

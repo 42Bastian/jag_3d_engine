@@ -17,11 +17,11 @@ _68KFLAGS=-4 ~oall -i$(BJL_ROOT)
 //->TJFLAGS= -w -sh
 
 TJFLAGS+= -D MOD=$(MOD) -sh
+ALL: check-dir bin/$(DEMO).j64
 
-%.o	: %.js
-	$(TJASS) $(TJFLAGS) $<
-
-ALL: bin/$(DEMO).j64
+.PHONY: check-dir
+check-dir:
+	@mkdir -p bin
 
 obl0_50.bin: obl.S video.h
 	$(RMAC) $(_68KFLAGS) -fr -D_PAL -D__0 $< -o $@
@@ -65,6 +65,10 @@ $(DEMO).o : $(DEMO).js $(DEPEND)
 	$(TJASS)  $(TJFLAGS) $<
 
 $(DEMO).bin : $(DEMO).js $(DEPEND)
+
+
+%.o	: %.js
+	$(TJASS) $(TJFLAGS) $<
 
 %.bin : %.js
 	$Q$(TJASS) $(TJFLAGS) -d -o $@ $<

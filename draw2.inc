@@ -29,7 +29,7 @@ Drawfaces::
 	WAITBLITTER		; wait for CLS to finish
 
 	movefa	screen0.a,tmp1
-	movei	#BLIT_PITCH1|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPIX,tmp0
+	movei	#BLIT_PITCH2|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPIX,tmp0
 	store	tmp1,(blitter)
 	store	tmp0,(blitter+_BLIT_A1_FLAGS)
 
@@ -88,7 +88,7 @@ gtriangle:
 	WAITBLITTER
 
 	movefa	screen0.a,tmp1
-	movei	#BLIT_PITCH1|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPIX,tmp0
+	movei	#BLIT_PITCH2|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPIX,tmp0
 	store	tmp1,(blitter)
 	store	tmp0,(blitter+_BLIT_A1_FLAGS)
  ELSE

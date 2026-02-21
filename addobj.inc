@@ -176,12 +176,12 @@ no_gouraud:
 	load	(y0),y0
 	cmp	z0,z1
 	load	(y1),y1
-	jr	mi,.lz
+	jr	pl,.lz
 	load	(y2),y2
 	move	z1,z0
 .lz	cmp	z0,z2
 	move	y0,tmp2
-	jr	mi,.lz1
+	jr	pl,.lz1
 	and	y1,tmp2
 	move	z2,z0
 .lz1
