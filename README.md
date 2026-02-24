@@ -6,3 +6,8 @@ Written in 100% GPU assembly.
 
 The demo uses Hively-player which runs completely in the DSP.
 
+## Cybermorp (CM) shapes
+
+Recompiled from binary blob. See
+
+https://forums.atariage.com/topic/388467-cybermorph-asset-decompile/
