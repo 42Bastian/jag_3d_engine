@@ -159,3 +159,31 @@ _tex_info_size 	EQU RSCOUNT
 	macro VNT
 	dc.w (\0) ,(\1) ,(\2) ,0
 	endm
+
+
+	;; normal
+	macro CM_NT
+	dc.w  -(\0)/16 ,-(\1)/16 ,-(\2)/16 ,0
+	endm
+
+	macro cm_tri			; p1,p2,p3,col
+	dc.w \0,\1,\2
+	dc.w \3
+ IF TEXTURE <> 0
+	dc.l 0			; dummy
+ ENDIF
+	endm
+	macro cm_ttri ; p1,p2,p3,texture
+	dc.w \0,\1,\2
+ IF TEXTURE <> 0
+	dc.w $80
+	dc.l \3			; texture data
+ ELSE
+	dc.w $8830
+ ENDIF
+	endm
+
+	macro CM_PT
+	dc.w \0/2 ,\1/2 ,\2/2 ,0
+
+	endm

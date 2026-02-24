@@ -111,6 +111,8 @@ object_data	equ $110000
 	defobj	diamant,20,36
 	defobj	tunnel,286,440
 	defobj	ship,8,12
+	defobj	bomb,27,42
+	defobj	bigship,23,26
 
 	defobj	plane, dia*dia, 2*(dia-1)*(dia-1)
 	RSB	plane_faces,4+(dia-1)*(dia-1)*2*face_size
@@ -417,7 +419,8 @@ pal:
 	addq	#4,r0
 	endm
 
-//->	ADD_OBJ ship
+	ADD_OBJ bomb
+	ADD_OBJ bigship
 	ADD_OBJ tunnel
 	ADD_OBJ kugel
 	ADD_OBJ torus2
@@ -685,9 +688,14 @@ ASCII::
 	include <js/inc/memcpy.inc>
 	include "pobjects.inc"
 	include "sintab.inc"
+ IF LANDSCAPE = 10
+	include "plane2_new.inc"
+ ENDIF
  IF LANDSCAPE = 1
 	include "plane2.inc"
+ ENDIF
 
+ IF LANDSCAPE <> 0
 	dphrase
 obj_plane:
 	dc.w	0		; visible
@@ -722,7 +730,6 @@ grass_tex_1:
 	tex_info_shifted 3, 0,0,63,63,0,63
  ENDIF
  ENDIF
-
 	align	8
 texture:
 

@@ -44,6 +44,8 @@ OBJ_INC+= objects/diamant.inc
 OBJ_INC+= objects/prisma.inc
 OBJ_INC+= objects/tunnel.inc
 OBJ_INC+= objects/ship.inc
+OBJ_INC+= objects/cm_bomb.inc
+OBJ_INC+= objects/cm_bigship.inc
 OBJ_INC+= plane2.inc
 OBJ_INC+= pobjects.inc
 

@@ -64,7 +64,7 @@ no_rotate:
 	load	(r0),r0
 
 	movei	#no_123,r1
-	movei	#$00F00000|JOY_1|JOY_2|JOY_3|JOY_A|JOY_B,joypad	 ; 1-3+Cursor
+	movei	#$00F00000|JOY_1|JOY_2|JOY_3|JOY_A|JOY_B|JOY_C,joypad	 ; 1-3+Cursor
 	and	r0,joypad
 	movei	#checkButton,check_button
 	jump	eq,(r1)
@@ -92,6 +92,8 @@ no_rotate:
 	bset	#JOY_3_BIT,testValue
 
 no_object:
+	moveq	#a_speed,r1
+	shlq	#2+1,r1
 	movei	#CAMERA_X,r14
 	btst	#JOY_RIGHT_BIT,joypad
 	load	(r14+CAMERA_ANGLE_Y-CAMERA_X),r0
@@ -99,7 +101,7 @@ no_object:
 	btst	#JOY_LEFT_BIT,joypad
 	jr	eq,no_turn
 	nop
-	addqt	#a_speed*4*2,r0
+	add	r1,r0
 turn_right:
 	subqt	#a_speed*4,r0
 
@@ -110,9 +112,9 @@ no_turn:
 
 	moveq	#5,tmp0
 	load	(r14+CAMERA_Y-CAMERA_X),cam_y
-	btst	#JOY_DOWN_BIT,joypad
+	btst	#JOY_A_BIT,joypad
 	jr	ne,up_down
-	btst	#JOY_UP_BIT,joypad
+	btst	#JOY_C_BIT,joypad
 	jr	eq,no_up_down
 	neg	tmp0
 up_down:
@@ -137,10 +139,10 @@ no_123:
 	load	(r0),joypad
 
 	load	(r14+CAMERA_SPEED-CAMERA_X),r2
-	btst	#JOY_A_BIT,joypad
+	btst	#JOY_UP_BIT,joypad
 	moveq	#4,r0
 	jr	ne,forward
-	btst	#JOY_B_BIT,joypad
+	btst	#JOY_DOWN_BIT,joypad
 	jr	eq,no_move
 	neg	r0
 forward:

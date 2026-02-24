@@ -179,3 +179,39 @@ obj_ship:
 	dc.l	ship_visible
 
 	include "objects/ship.inc"
+
+	dphrase
+obj_bomb:
+	dc.w	0		; visible
+	dc.w	-460,40,2800	; position: x,y,z
+	dc.w	0		; spare
+	dc.w	64,1600,0		; angle: a,b,c
+	dc.l	bomb_points
+	dc.l	bomb_faces
+	dc.l	bomb_normals
+	dc.l	0
+	dc.l	bomb_rotated
+	dc.l	bomb_normals_rotated
+	dc.l	0
+	dc.l	bomb_projected
+	dc.l	bomb_visible
+
+	include "objects/cm_bomb.inc"
+
+	dphrase
+obj_bigship:
+	dc.w	0		; visible
+	dc.w	-150,40,3000	; position: x,y,z
+	dc.w	0		; spare
+	dc.w	64,0,64		; angle: a,b,c
+	dc.l	bigship_points
+	dc.l	bigship_faces
+	dc.l	bigship_normals
+	dc.l	0
+	dc.l	bigship_rotated
+	dc.l	bigship_normals_rotated
+	dc.l	0
+	dc.l	bigship_projected
+	dc.l	bigship_visible
+
+	include "objects/cm_bigship.inc"

@@ -14,7 +14,7 @@ radius		equ 16
 dia		equ radius*2
 
 speed		equ 10
-a_speed		equ 4
+a_speed		equ 8
 
 far_z		equ grid_size*(radius+1)
 far_x		equ far_z	;*341/256

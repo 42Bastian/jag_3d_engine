@@ -36,7 +36,7 @@ AddObjects::
 	load	(tri_array),tri_array
 	movei	#tri_ptrs_ram,tri_ptrs
 
-SCALE	EQU 1024<<10/far_z
+SCALE	EQU 1024<<14/far_z
 
  IF SCALE > 32767
 	FAIL "SCALE exceeds range"
@@ -174,17 +174,12 @@ no_gouraud:
 	load	(y2),z2
 	addq	#4,y2
 	load	(y0),y0
-	cmp	z0,z1
+	add	z1,z0
 	load	(y1),y1
-	jr	pl,.lz
+	add	z2,z0
 	load	(y2),y2
-	move	z1,z0
-.lz	cmp	z0,z2
 	move	y0,tmp2
-	jr	pl,.lz1
 	and	y1,tmp2
-	move	z2,z0
-.lz1
 	and	y2,tmp2
 	movei	#(max_x+10)<<16,tmp3
 	jr	mi,.koxy	; all x < 0
