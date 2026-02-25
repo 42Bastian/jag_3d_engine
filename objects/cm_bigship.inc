@@ -59,10 +59,11 @@ bigship_points:
   CM_PT -77, -1,-132
   CM_PT -54, 21,125
 
+ IF TEXTURE <> 0
 bigship_texture_info:
 	tex_info_shifted 4, 0,0,63,0,63,63	 	; front
 	tex_info_shifted 4, 0,0,63,63,0,63 		; front
-
+ ENDIF
 bigship_faces:
 	dc.l 26
 ; 0
@@ -78,12 +79,13 @@ bigship_faces:
     cm_tri 5,7,6,$7dc
     cm_tri 5,6,4,$7dc
 ; 5 right wing top
-
+ IF TEXTURE <> 0
   cm_ttri 4, 6, 7, bigship_texture_info
   cm_ttri 4, 7, 5, bigship_texture_info+_tex_info_size
-
-//->    cm_tri 4,6,7,$f0dc
-//->    cm_tri 4,7,5,$f0dc
+ ELSE
+    cm_tri 4,6,7,$f0dc
+    cm_tri 4,7,5,$f0dc
+ ENDIF
 ; 6
     cm_tri 8,9,10,$785c
 ; 7
@@ -106,12 +108,13 @@ bigship_faces:
     cm_tri 17,18,16,$7dc
     cm_tri 17,16,15,$7dc
 ; 14 left wing up
+ IF TEXTURE <> 0
   cm_ttri 18, 17, 15, bigship_texture_info
   cm_ttri 18, 15, 16, bigship_texture_info+_tex_info_size
-
-//->    cm_tri 18,17,15,$f0dc
-//->    cm_tri 18,15,16,$f0dc
-
+ ELSE
+    cm_tri 18,17,15,$f0dc
+    cm_tri 18,15,16,$f0dc
+ ENDIF
 ; 15
     cm_tri 20,19,22,$003c
 ; 16

@@ -134,6 +134,9 @@ _fix_ntsc_aspect:
 
  IF NO_ASPECT_FIX = 0
 	imult	aspectFix,y1
+ IF max_x <= 256
+	sharq	#4,y1
+ ENDIF
  IF max_x = 384
 	sharq	#5,y1
  ENDIF

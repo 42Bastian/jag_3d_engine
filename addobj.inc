@@ -36,7 +36,7 @@ AddObjects::
 	load	(tri_array),tri_array
 	movei	#tri_ptrs_ram,tri_ptrs
 
-SCALE	EQU 1024<<14/far_z
+SCALE	EQU 1024<<12/far_z
 
  IF SCALE > 32767
 	FAIL "SCALE exceeds range"

@@ -165,6 +165,8 @@ _fix_ntsc_aspect2:
 	sharq	#3,ry
  CASE 640
 	sharq	#6,ry
+ ELSES
+	sharq	#4,ry
  ENDS
  ENDIF
 

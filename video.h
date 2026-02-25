@@ -19,7 +19,7 @@ aspect_patch_ntsc equ 22
  ENDIF
 
  IF max_x = 256
-aspect_patch_pal  equ 26
+aspect_patch_pal  equ 22
 aspect_patch_ntsc equ 22
  ENDIF
 
@@ -41,7 +41,11 @@ aspect_patch_pal  equ 35
 aspect_patch_ntsc equ 29
  ENDIF
 
+ IF max_x < 320
+max_x_txt	equ 320
+ ELSE
 max_x_txt	equ max_x
+ ENDIF
 max_y_txt	equ 5*8
 
 op_list		equ $400

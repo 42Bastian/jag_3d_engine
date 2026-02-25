@@ -15,7 +15,7 @@ screen	equ screen0
 screen	equ screen1
  ENDIF
 
- if max_x <> max_x_txt
+ if max_x > max_x_txt
 text_x = (max_x-max_x_txt)/2
  else
 text_x = 0

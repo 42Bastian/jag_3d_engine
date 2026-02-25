@@ -2,7 +2,7 @@
   .dsp
 
 ;;; Compiletime configuration
-READ_PAD        equ 1
+READ_PAD        equ 0
 UPDATE_SONG_POS equ 0
 DISPLAY_TIME    equ 0
 ;;; ----------------------------------------
@@ -28,7 +28,7 @@ DSP_stream_pos                  .equ $f1d000-36 ; read by 68k/GPU
 
 ;;; ----------------------------------------
 ;;; Configuration (constant)
-max_NB_channels         equ 11
+max_NB_channels         equ 10
 max_RM_channels         equ 3             ; max. RM buffers in DSP RAM
 RM_channels             equ (1<<0)|(1<<1)|(1<<2)|(1<<9)
 RM_buffers_main         equ $110        ; start of RM buffers in main
