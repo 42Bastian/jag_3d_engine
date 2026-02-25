@@ -11,3 +11,11 @@ The demo uses Hively-player which runs completely in the DSP.
 Recompiled from binary blob. See
 
 https://forums.atariage.com/topic/388467-cybermorph-asset-decompile/
+
+## Building
+
+Use latest lyxass, which support condtion combinations like 'jr pl_ne'.
+
+https://github.com/42Bastian/lyxass
+
+
