@@ -64,7 +64,7 @@ no_rotate:
 	load	(r0),r0
 
 	movei	#no_123,r1
-	movei	#$00F00000|JOY_1|JOY_2|JOY_3|JOY_A|JOY_B|JOY_C,joypad	 ; 1-3+Cursor
+	movei	#$00F00000|JOY_1|JOY_2|JOY_3,joypad	 ; 1-3+Cursor
 	and	r0,joypad
 	movei	#checkButton,check_button
 	jump	eq,(r1)
@@ -90,11 +90,17 @@ no_rotate:
 	moveq	#0,testValue
 	jump	(check_button)
 	bset	#JOY_3_BIT,testValue
-
 no_object:
+no_123:
+	movei	#LastJoy,r0
+	movei	#.exit,r1
+	load	(r0),joypad
+	cmpq	#0,joypad
+	jump	eq,(r1)
 	moveq	#a_speed,r1
 	shlq	#2+1,r1
 	movei	#CAMERA_X,r14
+
 	btst	#JOY_RIGHT_BIT,joypad
 	load	(r14+CAMERA_ANGLE_Y-CAMERA_X),r0
 	jr	ne,turn_right
@@ -109,19 +115,17 @@ turn_right:
 	shrq	#32-9-2,r0
 	store	r0,(r14+CAMERA_ANGLE_Y-CAMERA_X)
 no_turn:
-
-	moveq	#5,tmp0
-	load	(r14+CAMERA_Y-CAMERA_X),cam_y
 	btst	#JOY_A_BIT,joypad
+	load	(r14+CAMERA_Y-CAMERA_X),cam_y
+	addqt	#5,cam_y
 	jr	ne,up_down
 	btst	#JOY_C_BIT,joypad
 	jr	eq,no_up_down
-	neg	tmp0
+	subqt	#10,cam_y
 up_down:
+	moveq	#20,tmp2
 	moveq	#20,tmp1
-	move	tmp1,tmp2
 	shlq	#2,tmp2
-	add	tmp0,cam_y
 	cmp	tmp1,cam_y
 	jr	pl,up_down_ok
 	cmp	cam_y,tmp2
@@ -134,19 +138,15 @@ up_down_ok2:
 	store	cam_y,(r14+CAMERA_Y-CAMERA_X)
 no_up_down:
 
-no_123:
-	movei	#LastJoy+4,r0
-	load	(r0),joypad
-
 	load	(r14+CAMERA_SPEED-CAMERA_X),r2
 	btst	#JOY_UP_BIT,joypad
-	moveq	#4,r0
+	addqt	#4,r2
 	jr	ne,forward
 	btst	#JOY_DOWN_BIT,joypad
 	jr	eq,no_move
-	neg	r0
+	subqt	#8,r2
 forward:
-	add	r0,r2
+	cmpq	#0,r2
 	jr	pl,.oks1
 	cmpq	#-12,r2
 	jr	cc,.oks
@@ -198,11 +198,11 @@ no_move:
 	movei	#PrintDEC_YX,print_dec
 	movei	#printShort,print_short
 
-	movei	#2<<16|19,r1
+	movei	#2<<16|13,r1
 	BL	(print_short)
-	movei	#2<<16|(19+9),r1
+	movei	#2<<16|(13+9),r1
 	BL	(print_short)
-	movei	#2<<16|(19+18),r1
+	movei	#2<<16|(13+18),r1
 	BL	(print_short)
 
 	addq	#2,print_short
