@@ -12,7 +12,7 @@ start                    EQU $0000000000002000
 printShort               EQU $0000000000f032a4
 MODrun_engine            EQU $0000000000f03080
 MODextern_engine         EQU $0000000000000001
-SinTab                   EQU $000000000000cab0
+SinTab                   EQU $000000000000cb30
 createPlaneFaces         EQU $0000000000f03080
 rotate_camera            EQU $0000000000f0337a
 InitTxtScreen            EQU $00000000000036dc
@@ -21,17 +21,17 @@ printHex                 EQU $00000000000039a0
 planeSetColor            EQU $0000000000f0379e
 engine                   EQU $0000000000f03080
 createPlane              EQU $0000000000f0356e
-ASCII                    EQU $0000000000003d20
+ASCII                    EQU $0000000000003da0
 MODend_control           EQU $0000000000f03330
 rotate_object            EQU $0000000000f0324c
 rotate_camera1           EQU $0000000000f0339e
 PrintChar                EQU $00000000000038b0
 Drawfaces                EQU $0000000000f039e2
 MODlen_control           EQU $00000000000002b0
-memset                   EQU $0000000000004578
+memset                   EQU $00000000000045f8
 checkButton              EQU $0000000000f032ae
 MODrun_control           EQU $0000000000f03080
-memcpy                   EQU $00000000000045d4
+memcpy                   EQU $0000000000004654
 PrintChar_YX             EQU $00000000000038b8
 printString              EQU $000000000000398c
 drawDigit                EQU $00000000000039c0
@@ -56,5 +56,5 @@ preparePlane             EQU $0000000000003210
 PrintHEX                 EQU $0000000000003848
 MODlen_engine            EQU $0000000000000ef0
 planeCalcLuminance       EQU $0000000000f0371e
-memzero                  EQU $0000000000004528
+memzero                  EQU $00000000000045a8
 PrintDEC2                EQU $00000000000037f4

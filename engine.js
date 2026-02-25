@@ -80,13 +80,17 @@ CLS::
 	movei	#BLIT_PITCH2|BLIT_PIXEL16|BLIT_WIDTH|BLIT_XADDPHR,tmp0
 	store	tmp0,(blitter+_BLIT_A1_FLAGS)
 	moveq	#0,tmp1
-
+ IF max_y < 170
+	movei	#max_y<<16|(max_x),tmp2
+ ELSE
 	movei	#170<<16|(max_x),tmp2
+ ENDIF
 	store	tmp1,(blitter+_BLIT_A1_PIXEL)
 	movei	#B_PATDSEL|B_GOURD,tmp1
 	store	tmp2,(blitter+_BLIT_COUNT)
 	store	tmp1,(blitter+_BLIT_CMD)
 
+ IF max_y > 170
 	WAITBLITTER
 
 	shrq	#16,tmp2
@@ -97,6 +101,7 @@ CLS::
 	moveq	#0,tmp0
 	store	tmp1,(blitter+_BLIT_COUNT)
 	store	tmp0,(blitter+_BLIT_CMD)
+ ENDIF
  ENDIF
  ENDIF
  UNREG blitter,screen_ptr

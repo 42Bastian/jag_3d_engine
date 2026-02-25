@@ -41,12 +41,20 @@ _stop0:
 	.qphrase
 _bm:
  IF max_x < 320
- scbitmap screen,0,y_start,gr_phrase*2,gr_phrase,max_y-1,320.0/max_x,1.0,320.0/max_x,bpp,0,NOTRANS RELEASE,0,2
+ IF max_y < 200
+ scbitmap screen,gr_x,y_start,gr_phrase*2,gr_phrase,max_y-1,320.0/max_x,200.0/max_y,320.0/max_x,bpp,0,NOTRANS RELEASE,0,2
+ ELSE
+ scbitmap screen,gr_x,y_start,gr_phrase*2,gr_phrase,max_y-1,320.0/max_x,1.0,320.0/max_x,bpp,0,NOTRANS RELEASE,0,2
+ ENDIF
+ ELSE
+ IF max_y < 200
+ scbitmap screen,gr_x,y_start,gr_phrase*2,gr_phrase,max_y-1,1.0,200.0/max_y,1.0,bpp,0,NOTRANS RELEASE,0,2
  ELSE
  bitmap screen,gr_x,y_start,gr_phrase*2,gr_phrase,max_y,bpp,0,NOTRANS RELEASE,0,2
  ENDIF
- bitmap	TxtScreen, gr_x+text_x,y_start+max_y,(max_x_txt/64),(max_x_txt/64),max_y_txt, 0,127, NOTRANS RELEASE,0,1
- bitmap	logo_screen, gr_x,y_start+max_y-10,1,1,9, 0,0,TRANS  RELEASE,0,1
+ ENDIF
+ bitmap	TxtScreen, gr_x+text_x,y_start+200,(max_x_txt/64),(max_x_txt/64),max_y_txt, 0,127, NOTRANS RELEASE,0,1
+ bitmap	logo_screen, gr_x,y_start+200-10,1,1,9, 0,0,TRANS  RELEASE,0,1
  stop
 
 	.qphrase
