@@ -2,6 +2,7 @@
 * rez
 max_x	equ 384
 max_y	equ 200
+	;; note: max_y 172 if max_x = 640
 
 IF max_x = 384
 VID_MODE EQU $4c1
@@ -14,31 +15,44 @@ ENDIF
 ENDIF
 
  IF max_x = 160
-aspect_patch_pal  equ 26
-aspect_patch_ntsc equ 22
+project_shift_x	  equ 8
+aspect_patch_pal  equ 17
+aspect_patch_ntsc equ 15
+aspect_shift	  equ 4
  ENDIF
 
  IF max_x = 256
-aspect_patch_pal  equ 22
-aspect_patch_ntsc equ 22
- ENDIF
-
- IF max_x = 384
-aspect_patch_pal  equ 26
-aspect_patch_ntsc equ 22
-
-;;->aspect_patch_pal  equ 31	; video capture
-;;->aspect_patch_ntsc equ 31
+project_shift_x	  equ 8
+aspect_patch_pal  equ 12
+aspect_patch_ntsc equ 10
+aspect_shift	  equ 4
  ENDIF
 
  IF max_x = 320
-aspect_patch_pal  equ 9
+project_shift_x	  equ 7
+aspect_patch_pal  equ 18
 aspect_patch_ntsc equ 15
+aspect_shift	  equ 4
+ ENDIF
+
+ IF max_x = 384
+project_shift_x	  equ 7
+aspect_patch_pal  equ 12
+aspect_patch_ntsc equ 11
+aspect_shift	  equ 4
  ENDIF
 
  IF max_x = 640
-aspect_patch_pal  equ 35
-aspect_patch_ntsc equ 29
+project_shift_x	  equ 6
+aspect_patch_pal  equ 15
+aspect_patch_ntsc equ 14
+aspect_shift	  equ 4
+ ENDIF
+
+ IF max_y = 100
+project_shift_y	  equ 8
+ ELSE
+project_shift_y	  equ 7
  ENDIF
 
  IF max_x < 320

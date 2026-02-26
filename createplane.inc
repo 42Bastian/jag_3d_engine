@@ -130,9 +130,9 @@ createPlane::
 	abs	ry
 	mult	tmp3,rx		; unsigned !!!
 	mult	tmp3,ry		; unsigned !!!
-	shrq	#7,rx
+	shrq	#project_shift_x,rx
 	movei	#32767-max_x/2,tmp3
-	shrq	#7,ry
+	shrq	#project_shift_y,ry
 	cmp	rx,tmp3
 	movei	#32767-max_y/2,tmp3
 	jr	pl,._1
@@ -158,16 +158,7 @@ _fix_ntsc_aspect2:
 	movei	#aspect_patch_pal,tmp2
  ENDIF
 	imult	tmp2,ry
- SWITCH max_x
- CASE	384
-	sharq	#5,ry
- CASE 320
-	sharq	#3,ry
- CASE 640
-	sharq	#6,ry
- ELSES
-	sharq	#4,ry
- ENDS
+	sharq	#aspect_shift,ry
  ENDIF
 
  IF DARKEN = 1

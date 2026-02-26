@@ -53,7 +53,11 @@ _bm:
  bitmap screen,gr_x,y_start,gr_phrase*2,gr_phrase,max_y,bpp,0,NOTRANS RELEASE,0,2
  ENDIF
  ENDIF
+ IF max_y > 200
+ bitmap	TxtScreen, gr_x+text_x,y_start+200,(max_x_txt/64),(max_x_txt/64),max_y_txt, 0,127, TRANS RELEASE,0,1
+ ELSE
  bitmap	TxtScreen, gr_x+text_x,y_start+200,(max_x_txt/64),(max_x_txt/64),max_y_txt, 0,127, NOTRANS RELEASE,0,1
+ ENDIF
  bitmap	logo_screen, gr_x,y_start+200-10,1,1,9, 0,0,TRANS  RELEASE,0,1
  stop
 

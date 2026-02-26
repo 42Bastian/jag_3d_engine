@@ -110,8 +110,10 @@ _fix_ntsc_aspect:
 	abs	y1
 	mult	reci,x1
 	mult	reci,y1
-	shrq	#7,x1
-	shrq	#7,y1
+
+	shrq	#project_shift_x,x1
+	shrq	#project_shift_y,y1
+
 	movei	#32767-max_x/2,tmp0
 	cmp	x1,tmp0
 	movei	#32767-max_y/2,tmp1
@@ -134,18 +136,7 @@ _fix_ntsc_aspect:
 
  IF NO_ASPECT_FIX = 0
 	imult	aspectFix,y1
- IF max_x <= 256
-	sharq	#4,y1
- ENDIF
- IF max_x = 384
-	sharq	#5,y1
- ENDIF
- IF max_x = 320
-	sharq	#3,y1
- ENDIF
- IF max_x = 640
-	sharq	#6,y1
- ENDIF
+	sharq	#aspect_shift,y1
  ENDIF
 	add	xcenter,x1
 	add	ycenter,y1
