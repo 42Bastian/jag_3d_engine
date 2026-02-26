@@ -9,15 +9,15 @@ LANDSCAPE	set 1
 TEXTURE		set 1
 DARKEN		set 0		; distance darkening (broken!)
 
-FPS		set 6		; fixed number of rendering frames
+FPS		set 1		; fixed number of rendering frames
 
 IFND MOD
 MOD		EQU 0
 ENDIF
 
 chip		equ 0
-gone		equ 1
-galactic	equ 0
+gone		equ 0
+galactic	equ 1
 
 	include <js/symbols/jagregeq.js>
 	include <js/symbols/blit_eq.js>
@@ -113,6 +113,8 @@ object_data	equ $110000
 	defobj	ship,8,12
 	defobj	bomb,27,42
 	defobj	bigship,23,26
+	defobj	entry1,14,24
+	defobj	entry7,60,48
 
 	defobj	plane, dia*dia, 2*(dia-1)*(dia-1)
 	RSB	plane_faces,4+(dia-1)*(dia-1)*2*face_size
@@ -124,7 +126,7 @@ object_data	equ $110000
 
 	RSALIGN 8
 	RSL	tri_ptrs_ram,1024
-	RSB	tri_array_ram,_tri_size*1024
+	RSB	tri_array_ram,_tri_size*1400
 mem_end	EQU RSADDR
 
 	echo "memory end: %H mem_end"
@@ -134,7 +136,7 @@ mem_end	EQU RSADDR
 	echo "x_save %H x_save"
  ENDIF
 
-	RSSET $1000
+	RSSET $800
 	RSL	OBJECT_LIST,64
 	RSL	CAMERA_X
 	RSL	CAMERA_Y
@@ -419,6 +421,7 @@ pal:
 	addq	#4,r0
 	endm
 
+//->	ADD_OBJ entry7
 	ADD_OBJ bomb
 	ADD_OBJ bigship
 	ADD_OBJ tunnel
@@ -472,7 +475,7 @@ pal:
 	movei	#(26591-1)<<16|0,tmp0
 	store	tmp0,(tmp1)
 
-	xor	r0,r0
+	moveq	#FPS-1,r0
 	moveta	r0,vbl_counter.a
 
 //->	moveq	#8,r0
@@ -535,7 +538,7 @@ main_loop:
 	add	r2,r0
 	div	r1,r0
 
-	moveq	#15,r1
+	moveq	#31,r1
 	and	r1,r0
 	moveq	#0,r1
 	bset	#17,r1
@@ -547,9 +550,26 @@ main_loop:
 	shlq	#16,r0
 	shrq	#16,r0
 
+	move	r0,r4
+
+	movei	#100,r1
+	div	r1,r0
+	move	r0,r2
+	mult	r1,r2
+	sub	r2,r4
+
+	cmpq	#0,r0
 	moveq	#6,r1
+	jr	eq,.zero
+	addq	#32,r0
+	addq	#'0'-32,r0
+.zero
 	bset	#17,r1
-	movei	#PrintDEC_YX,r2
+	movei	#PrintChar_YX,r2
+	BL	(r2)
+	move	r4,r0
+
+	movei	#PrintDEC2,r2
 	BL	(r2)
 
 	movefa	dump.a,r0
@@ -562,19 +582,7 @@ main_loop:
 	movei	#PrintDEC_YX,r2
 	BL	(r2)
 
-//->	movei	#$dfff00,r1
-//->	movefa	dump0.a,r0
-//->	store	r0,(r1)
-//->	addq	#4,r1
-//->	moveq	#13,r0
-//->	store	r0,(r1)
-
-//->	moveq	#9,r1
-//->	movei	#PrintHEX_YX,r2
-//->	BL	(r2)
-
 	movei	#main_loop,r0
-	nop
 	jump	(r0)
 	nop
 
@@ -648,8 +656,8 @@ overlay::
 
 ******************
 * text-data
-Hallo:		DC.B " 000000 tris   move: 1/2/3 + U/D // focus: O",0
-ms:		DC.B "00FPS  000000ms   X 123456 Y 123456 Z 123456",0
+Hallo:		DC.B " 000000 tris   move: 123 + U/D focus:Opt",0
+ms:		DC.B "00FPS 000ms X 123456 Y 123456 Z 123456",0
 info:		dc.b "     3D poly engine (c)'25 42Bastian",0
 	EVEN
 

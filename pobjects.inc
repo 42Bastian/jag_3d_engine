@@ -215,3 +215,41 @@ obj_bigship:
 	dc.l	bigship_visible
 
 	include "objects/cm_bigship.inc"
+
+	dphrase
+obj_entry1:
+	dc.w	0		; visible
+//->	dc.w	-150,40,2300	; position: x,y,z
+	dc.w	-100,70,2000		; position: x,y,z
+	dc.w	0		; spare
+	dc.w	0,0,0		; angle: a,b,c
+	dc.l	entry1_points
+	dc.l	entry1_faces
+	dc.l	entry1_normals
+	dc.l	0
+	dc.l	entry1_rotated
+	dc.l	entry1_normals_rotated
+	dc.l	0
+	dc.l	entry1_projected
+	dc.l	entry1_visible
+
+	include "objects/entry1.shp"
+
+	dphrase
+obj_entry7:
+	dc.w	0		; visible
+//->	dc.w	-150,40,2300	; position: x,y,z
+	dc.w	-100,70,2000		; position: x,y,z
+	dc.w	0		; spare
+	dc.w	0,0,0		; angle: a,b,c
+	dc.l	entry7_points
+	dc.l	entry7_faces
+	dc.l	entry7_normals
+	dc.l	0
+	dc.l	entry7_rotated
+	dc.l	entry7_normals_rotated
+	dc.l	0
+	dc.l	entry7_projected
+	dc.l	entry7_visible
+
+	include "objects/entry7.shp"

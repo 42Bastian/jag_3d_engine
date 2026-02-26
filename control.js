@@ -152,7 +152,7 @@ forward:
 	jr	cc,.oks
 	nop
 	jr	.oks
-	sub	r0,r2
+	addqt	#4,r2
 
 .oks1
 	cmpq	#12,r2
@@ -162,6 +162,9 @@ forward:
 .oks
 	store	r2,(r14+CAMERA_SPEED-CAMERA_X)
 no_move:
+	movei	#LastJoy+4,r0
+	load	(r0),joypad
+
 	btst	#JOY_OPTION_BIT,joypad
 	movei	#OBJECT_PTR,r3
 	jr	eq,.not_option
